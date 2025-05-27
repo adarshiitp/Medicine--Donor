@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Medicine Donor - Home</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
+</head>
+<body>
+    <header>
+        <h1>Medicine Donor</h1>
+        <nav>
+            <a href="{{ url_for('home') }}">Home</a>
+            <a href="{{ url_for('donate') }}">Donate</a>
+            <a href="{{ url_for('view') }}">View Donations</a>
+        </nav>
+    </header>
+
+    <main>
+        <section class="stats">
+            <h2>Total Medicines Donated: <span id="total-count">{{ total }}</span></h2>
+        </section>
+
+        <section class="medicines-list">
+            <input type="text" id="search-box" placeholder="Search by medicine or state..." />
+            <select id="city-filter">
+                <option value="">All States</option>
+                <option value="my state">My State</option>
+                <option value="andhra pradesh">Andhra Pradesh</option>
+                <option value="arunachal pradesh">Arunachal Pradesh</option>
+                <option value="assam">Assam</option>
+                <option value="bihar">Bihar</option>
+                <option value="chhattisgarh">Chhattisgarh</option>
+                <option value="goa">Goa</option>
+                <option value="gujarat">Gujarat</option>
+                <option value="haryana">Haryana</option>
+                <option value="himachal pradesh">Himachal Pradesh</option>
+                <option value="jharkhand">Jharkhand</option>
+                <option value="karnataka">Karnataka</option>
+                <option value="kerala">Kerala</option>
+                <option value="madhya pradesh">Madhya Pradesh</option>
+                <option value="maharashtra">Maharashtra</option>
+                <option value="manipur">Manipur</option>
+                <option value="meghalaya">Meghalaya</option>
+                <option value="mizoram">Mizoram</option>
+                <option value="nagaland">Nagaland</option>
+                <option value="odisha">Odisha</option>
+                <option value="punjab">Punjab</option>
+                <option value="rajasthan">Rajasthan</option>
+                <option value="sikkim">Sikkim</option>
+                <option value="tamil nadu">Tamil Nadu</option>
+                <option value="telangana">Telangana</option>
+                <option value="tripura">Tripura</option>
+                <option value="uttar pradesh">Uttar Pradesh</option>
+                <option value="uttarakhand">Uttarakhand</option>
+                <option value="west bengal">West Bengal</option>
+                <option value="delhi">Delhi</option>
+                <option value="jammu and kashmir">Jammu and Kashmir</option>
+                <option value="ladakh">Ladakh</option>
+            </select>
+
+            <ul id="medicine-list">
+                {% for med in medicines %}
+                <li class="medicine-item" data-expiry="{{ med['expiry_date'] }}">
+                    <h3>{{ med['name'] }}</h3>
+                    <p>City: {{ med['city'] }}</p>
+                    <p>Phone: <a href="tel:{{ med['phone'] }}" class="call-btn">📞 Call</a></p>
+                    <p>Expiry: {{ med['expiry_date'] }}</p>
+                </li>
+                {% endfor %}
+            </ul>
+        </section>
+    </main>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
